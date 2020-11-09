@@ -3,7 +3,7 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import CssBaseLine from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 import Sidebar from "./components/Sidebar/Sidebar";
-import RealEstateListP from "./pages/RealEstateListP";
+import RealEstateListP from "./pages/RealEstate";
 
 const useStyles = makeStyles((theme) => ({
   app: {
@@ -22,7 +22,7 @@ export default function App() {
       <Grid item xs={12} sm={12} md={1} lg={1} xl={1}>
         <Sidebar />
       </Grid>
-      <Grid item xs={12} sm={12} md={11} lg={11} xl={11}>
+      <Grid item  xs={12} sm={12} md={11} lg={11} xl={11}>
         <RealEstateListP />
       </Grid>
     </Grid>
