@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import CssBaseLine from "@material-ui/core/CssBaseline";
+import Grid from "@material-ui/core/Grid";
+import Sidebar from "./components/Sidebar/Sidebar";
+import RealEstateListP from "./pages/RealEstateListP";
 
-function App() {
+const useStyles = makeStyles((theme) => ({
+  app: {
+    height: "100vh",
+    width: "100%",
+    maxHeight: "100vh",
+    maxWidth: "100%",
+  },
+}));
+
+export default function App() {
+  const classes = useStyles();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Grid container className={classes.app}>
+      <CssBaseLine />
+      <Grid item xs={12} sm={12} md={1} lg={1} xl={1}>
+        <Sidebar />
+      </Grid>
+      <Grid item xs={12} sm={12} md={11} lg={11} xl={11}>
+        <RealEstateListP />
+      </Grid>
+    </Grid>
   );
 }
-
-export default App;
