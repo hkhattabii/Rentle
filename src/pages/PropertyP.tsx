@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function RealEstateListP() {
+export default function PropertyP() {
   const classes = useStyles();
   const [realEstates, setRealEstates] = React.useState<IFetchState<IProperty[]>>({loading: true, data: undefined})
 

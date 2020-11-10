@@ -5,7 +5,9 @@ import NavItem from "./NavItem";
 
 const useStyles = makeStyles((theme) => ({
   sidebar: {
-    height: "100%",
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
     backgroundColor: theme.palette.primary.main,
   },
 }));
@@ -13,12 +15,13 @@ const useStyles = makeStyles((theme) => ({
 export default function Sidebar() {
   const classes = useStyles();
   return (
-    <List className={classes.sidebar}>
-        <NavItem label="Biens"  />
-        <NavItem label="Locataires"  />
-        <NavItem label="Bails"  />
-        <NavItem label="Notifications"  />
-        <NavItem label="Génération"  />
-    </List>
+    <header className={classes.sidebar}>
+      <NavItem label="Biens" to="/properties" />
+      <NavItem label="Locataires" to="/properties" />
+      <NavItem label="Guarants" to="/guarantors" />
+      <NavItem label="Bails" to="/properties" />
+      <NavItem label="Notifications" to="/properties" />
+      <NavItem label="Génération" to="/generations" />
+    </header>
   );
 }
