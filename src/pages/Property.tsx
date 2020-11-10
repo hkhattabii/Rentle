@@ -8,6 +8,7 @@ import { IFetchState, IProperty } from "../types";
 const useStyles = makeStyles((theme) => ({
   realEstateList: {
     backgroundColor: "#efefef",
+    width: "100%",
     maxHeight: "100vh",
     overflowY: "hidden",
   },

@@ -14,11 +14,12 @@ interface InputProps {
     name?: string
     label?: string,
     type?: string,
+    disabled?: boolean
     value?: string | number
     onChange?: (name: string, value: string | number) => void
 }
 
-function Input({variant,name, label,type,value, onChange}: InputProps) {
+function Input({variant,name, label,type,disabled,value, onChange}: InputProps) {
     const classes = useStyles()
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,7 +28,7 @@ function Input({variant,name, label,type,value, onChange}: InputProps) {
     }
 
     return (
-        <TextField 
+    <TextField 
         variant={variant}
         name={name}
         label={label}
@@ -37,7 +38,7 @@ function Input({variant,name, label,type,value, onChange}: InputProps) {
         focused
         fullWidth
         className={classes.InputRoot}
-        />
+    />
             
     )
 }

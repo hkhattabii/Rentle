@@ -1,9 +1,12 @@
+
+export interface IDocument {
+    id: string
+}
 export interface ILocation {
     street: string,
     zipcode: string,
     city: string,
     country: string,
-    Occupant: string
     [key: string]: string
 }
 
@@ -11,15 +14,13 @@ export interface IOccupant {
     avatar: string
 }
 
-export interface IProperty {    
-    id: string,
-    image: string | File,
+export interface IProperty extends IDocument {    
+    image: string,
     type: string,
     size: number,
     sizeLivingRoom: number,
     sizeKitchen: number,
-    sizeBedrooms: number,
-    bedroomCount: number,
+    bedrooms: number[]
     floorNumber: number,
     price: number,
     charges: number,

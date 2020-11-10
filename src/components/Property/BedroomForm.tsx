@@ -18,12 +18,12 @@ export default function BedroomForm({ open, onClose, onSubmit, bedroomCount } : 
     const [bedrooms, setBedrooms] = React.useState<number[]>(new Array(bedroomCount).fill(0))
 
     const handleChange = (index: number, value: number) => {
-        console.log("cc")
         setBedrooms(bedrooms.map((bedroom, i) => i === index ? value : bedroom  ))
     }
 
     const handleSubmit = () => {
         onSubmit(bedrooms)
+        onClose()
     }
 
     console.log(bedrooms)

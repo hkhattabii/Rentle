@@ -2,8 +2,8 @@ import { message } from 'antd'
 import axios from 'axios'
 
 export default () => {
-    return async (file: File | undefined) => {
-        if (!file) return ""
+    return async (file: File | string |undefined) => {
+        if (!file || typeof file === "string") return ""
         const formData = new FormData()
         formData.append("file", file)
         formData.append("api_key", "NfPWRgJFDYsstVHoHjMdUoRhMms")
