@@ -20,7 +20,8 @@ export interface IProperty extends IDocument {
     size: number,
     sizeLivingRoom: number,
     sizeKitchen: number,
-    bedrooms: number[]
+    bedrooms: number[],
+    bedroomCount: number,
     floorNumber: number,
     price: number,
     charges: number,

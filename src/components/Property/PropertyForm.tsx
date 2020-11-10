@@ -5,20 +5,20 @@ import Select from "../UI/Select";
 import Input from "../UI/Input";
 import BedroomForm from "./BedroomForm";
 import ImageUploader from "../UI/ImageUploader";
-import { IPropertyForm } from "./types";
+import { IPropertyFormState } from "./types";
 import { TextField } from "@material-ui/core";
 
 interface PropertyFormProps {
-  form: IPropertyForm
-  setForm: React.Dispatch<React.SetStateAction<IPropertyForm>>
+  form: IPropertyFormState
+  setForm: React.Dispatch<React.SetStateAction<IPropertyFormState>>
 }
 
 export default function PropertyForm({ form, setForm}: PropertyFormProps) {
   const [bedroomsOpen, setBedroomsOpen] = React.useState(false);
 
-  const handlePropertyChange = (name: string, value: any) => setForm({ ...form, [name]: value });
-  const handleLocationChange = (name: string, value: any) => setForm({ ...form, address: {...form.address, [name]: value}})
-  const handleFileChange = (file: File) => setForm({ ...form, image: file})
+  const handlePropertyChange = (name: string, value: any) => setForm({ ...form, data: {...form.data, [name]: value }  });
+  const handleLocationChange = (name: string, value: any) => setForm({ ...form, data: {...form.data, address: {...form.data.address, [name]: value} }})
+  const handleFileChange = (file: File) => setForm({ ...form, data: {...form.data, image: file}  })
 
   const onOpen = () => setBedroomsOpen(true)
   const onClose = () => setBedroomsOpen(false);
@@ -32,7 +32,7 @@ export default function PropertyForm({ form, setForm}: PropertyFormProps) {
         open={bedroomsOpen} 
         onClose={onClose} 
         onSubmit={bedrooms => handlePropertyChange("bedrooms", bedrooms)}
-        bedroomCount={form.bedroomCount} />
+        bedroomCount={form.data.bedroomCount} />
       }
       <TableCell />
       <TableCell align="center">
@@ -42,7 +42,7 @@ export default function PropertyForm({ form, setForm}: PropertyFormProps) {
         <Select
           name="type"
           data={["Maison", "Appartement", "Chambre"]}
-          currentValue={form.type}
+          currentValue={form.data.type}
           onChange={handlePropertyChange}
         />
       </TableCell>
@@ -51,7 +51,7 @@ export default function PropertyForm({ form, setForm}: PropertyFormProps) {
           name="size"
           variant="standard"
           type="number"
-          value={form.size}
+          value={form.data.size}
           onChange={handlePropertyChange}
         />
       </TableCell>
@@ -60,7 +60,7 @@ export default function PropertyForm({ form, setForm}: PropertyFormProps) {
           name="sizeLivingRoom"
           variant="standard"
           type="number"
-          value={form.sizeLivingRoom}
+          value={form.data.sizeLivingRoom}
           onChange={handlePropertyChange}
         />
       </TableCell>
@@ -69,7 +69,7 @@ export default function PropertyForm({ form, setForm}: PropertyFormProps) {
           name="sizeKitchen"
           variant="standard"
           type="number"
-          value={form.sizeKitchen}
+          value={form.data.sizeKitchen}
           onChange={handlePropertyChange}
         />
       </TableCell>
@@ -77,7 +77,7 @@ export default function PropertyForm({ form, setForm}: PropertyFormProps) {
         <TextField 
           name="bedroomSize"
           variant="standard"
-          value={form.bedrooms.length > 0 ? form.bedrooms.reduce((accumulator, currentValue) => accumulator+ currentValue) : 0}
+          value={form.data.bedrooms.length > 0 ? form.data.bedrooms.reduce((accumulator, currentValue) => accumulator+ currentValue) : 0}
           onClick={onOpen}
         />
       </TableCell>
@@ -86,7 +86,7 @@ export default function PropertyForm({ form, setForm}: PropertyFormProps) {
           name="bedroomCount"
           variant="standard"
           type="number"
-          value={form.bedroomCount}
+          value={form.data.bedroomCount}
           onChange={handlePropertyChange}
         />
       </TableCell>
@@ -95,7 +95,7 @@ export default function PropertyForm({ form, setForm}: PropertyFormProps) {
           name="floorNumber"
           variant="standard"
           type="number"
-          value={form.floorNumber}
+          value={form.data.floorNumber}
           onChange={handlePropertyChange}
         />
       </TableCell>
@@ -104,7 +104,7 @@ export default function PropertyForm({ form, setForm}: PropertyFormProps) {
           name="price"
           variant="standard"
           type="number"
-          value={form.price}
+          value={form.data.price}
           onChange={handlePropertyChange}
         />
       </TableCell>
@@ -113,7 +113,7 @@ export default function PropertyForm({ form, setForm}: PropertyFormProps) {
           name="charges"
           variant="standard"
           type="number"
-          value={form.charges}
+          value={form.data.charges}
           onChange={handlePropertyChange}
         />
       </TableCell>
@@ -121,7 +121,7 @@ export default function PropertyForm({ form, setForm}: PropertyFormProps) {
         <Input
           name="street"
           variant="standard"
-          value={form.address.street}
+          value={form.data.address.street}
           onChange={handleLocationChange}
         />
       </TableCell>
@@ -129,7 +129,7 @@ export default function PropertyForm({ form, setForm}: PropertyFormProps) {
         <Input
           name="zipcode"
           variant="standard"
-          value={form.address.zipcode}
+          value={form.data.address.zipcode}
           onChange={handleLocationChange}
         />
       </TableCell>
@@ -137,7 +137,7 @@ export default function PropertyForm({ form, setForm}: PropertyFormProps) {
         <Input
           name="city"
           variant="standard"
-          value={form.address.city}
+          value={form.data.address.city}
           onChange={handleLocationChange}
         />
       </TableCell>
@@ -145,7 +145,7 @@ export default function PropertyForm({ form, setForm}: PropertyFormProps) {
         <Input
           name="country"
           variant="standard"
-          value={form.address.country}
+          value={form.data.address.country}
           onChange={handleLocationChange}
         />
       </TableCell>

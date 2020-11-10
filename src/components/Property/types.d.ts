@@ -13,3 +13,9 @@ export interface IPropertyForm {
     [key: string] : string | number | ILocation | IOccupant
 }
 
+
+export interface IPropertyFormState {
+    open: boolean,
+    isUpdating: boolean,
+    data: IPropertyForm
+}
