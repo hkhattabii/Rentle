@@ -11,18 +11,31 @@ export interface IOccupant {
     avatar: string
 }
 
-export interface IRealEstate {
+export interface IProperty {    
     id: string,
-    image: string,
+    image: string | File,
     type: string,
     size: number,
     sizeLivingRoom: number,
     sizeKitchen: number,
     sizeBedrooms: number,
+    bedroomCount: number,
     floorNumber: number,
     price: number,
     charges: number,
-    location: ILocation,
+    address: ILocation,
     leasedBy: IOccupant
     [key: string] : string | number | ILocation | IOccupant
+}
+
+export interface IAPIRES<T = undefined> {
+    success?: boolean,
+    message?: string
+    data?: T
+}
+
+
+export interface IFetchState<T> {
+    loading: boolean
+    data: T | undefined
 }
