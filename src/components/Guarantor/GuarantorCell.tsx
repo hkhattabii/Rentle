@@ -5,13 +5,13 @@ import Checkbox from "@material-ui/core/Checkbox";
 import Avatar from "@material-ui/core/Avatar";
 import { IGuarantor, IProperty } from "../../types";
 
-type PropertyCellProps =  {
+type GuarantorCellProps =  {
     guarantor: IGuarantor
     onSelect: (currentValue: boolean, propertySelected: string) => void
     selected?: boolean
 }
 
-export default function GurantorCell({onSelect, selected, guarantor}: PropertyCellProps) {
+export default function GurantorCell({onSelect, selected, guarantor}: GuarantorCellProps) {
   return (
     <TableRow
       style={{

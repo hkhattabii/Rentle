@@ -21,9 +21,7 @@ interface GuarantorTableProps {
 
 export default function GuarantorTable({ data }: GuarantorTableProps) {
   const [guarantors, setGuarantors] = React.useState(data);
-  const [guarantorsSelected, setGuarantorSelected] = React.useState<string[]>(
-    []
-  );
+  const [guarantorsSelected, setGuarantorSelected] = React.useState<string[]>([]);
   const [form, setForm] = React.useState<IGuarantorFormState>(guarantorFormState);
   const client = useClient();
   const { getDocID, getDocObjID } = useGetDoc();
