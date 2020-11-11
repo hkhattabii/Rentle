@@ -3,7 +3,11 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import Grid from "@material-ui/core/Grid";
 import axios from 'axios'
 import { IFetchState, IGuarantor } from "../types";
-import GuarantorTable from "../components/Guarantor/GuarantorTable";
+import Table from "../components/UI/Table";
+import initFormState from "../components/Guarantor/formState";
+import guarantorColumns from "../components/Guarantor/columns";
+import GuarantorForm from "../components/Guarantor/GuarantorForm";
+import GuarantorCell from "../components/Guarantor/GuarantorCell";
 
 const useStyles = makeStyles((theme) => ({
   guarantorList: {
@@ -39,7 +43,24 @@ export default function GuarantorP() {
   return (
     <Grid container className={classes.guarantorList}>
       <Grid item container direction="column" alignItems="flex-start">
-        <GuarantorTable data={guarantors.data} />
+        <Table data={guarantors.data} formState={initFormState} columns={guarantorColumns} entity="guarant" fetchUri="/guarantors">
+          {
+            (form, setForm, toggleSelect, getDocID, guarantorsSelected, entities) => (
+              <React.Fragment>
+                {
+                  form.open && !form.isUpdating && <GuarantorForm form={form} setForm={setForm} />
+                }
+                {
+                  entities && entities.map(guarantor => {
+                    const isSelected = getDocID(guarantorsSelected, guarantor.id)
+                    if (form.isUpdating && guarantorsSelected[0] === guarantor.id) return <GuarantorForm key={guarantor.id} form={form} setForm={setForm} />
+                    return <GuarantorCell key={guarantor.id}  selected={Boolean(isSelected)} onSelect={toggleSelect} guarantor={guarantor}  /> 
+                  })
+                }
+              </React.Fragment>
+            )
+          }
+        </Table>
       </Grid>
     </Grid>
   );

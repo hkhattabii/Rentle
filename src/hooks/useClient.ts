@@ -48,7 +48,6 @@ export default function useClient() {
       if (!entities) return;
       const fileURL = isUpdating && typeof form.image === "string" ? form.image :  await uploadImageFile(form.image);
       const body = { ...form, image: fileURL };
-      console.log(body)
       isUpdating ? message.loading(`Mise à jour du ${entity}  ...`) : message.loading(`Insertion du ${entity} ...`);
       const res: IAPIRES<TEntity> = isUpdating
         ? (await axios.put(uri, body)).data
@@ -58,7 +57,7 @@ export default function useClient() {
         return;
       } else if (res.data) {
         message.success(res.message);
-        return isUpdating ? entities.map(entity => res.data && entity.id === res.data.id ? res.data : entity)    : [...entities, res.data];
+        return isUpdating ? entities.map(entity => res.data && entity.id === res.data.id ? res.data : entity) : [...entities, res.data];
       }
     },
   };

@@ -14,9 +14,3 @@ export interface IPersonForm {
 
 
 export interface IGuarantorForm extends IPersonForm {}
-
-export interface IGuarantorFormState extends IEntityFormState {
-    open: boolean;
-    isUpdating: boolean;
-    data: IGuarantorForm
-}

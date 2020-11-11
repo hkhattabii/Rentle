@@ -11,7 +11,7 @@ type GuarantorCellProps =  {
     selected?: boolean
 }
 
-export default function GurantorCell({onSelect, selected, guarantor}: GuarantorCellProps) {
+export default function GuarantorCell({onSelect, selected, guarantor}: GuarantorCellProps) {
   return (
     <TableRow
       style={{

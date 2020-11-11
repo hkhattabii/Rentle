@@ -6,26 +6,35 @@ import {default as MuiTable} from "@material-ui/core/Table";
 import TableHead from "./TableHead";
 import TableBody from "@material-ui/core/TableBody";
 import useClient from "../../hooks/useClient";
-import useGetDoc from "../../hooks/useGeDoc";
+import useGetDoc, {GetDocIDFunc} from "../../hooks/useGeDoc";
 import { IDocument, IEntityFormState } from "../../types";
 import { TableRow } from "@material-ui/core";
 import { IOccupantForm } from "../Occupant/types";
 import { WithImage } from "../../hooks/types";
+import initFormState from "../Guarantor/formState";
 
 
-interface TableProps<T, TFormState> {
+interface TableProps<T extends IDocument, TForm extends WithImage> {
   data: T[] | undefined;
-  formState: TFormState;
+  formState: IEntityFormState<TForm>;
   fetchUri: string,
   entity: "guarant" | "bien" | "locataire",
   columns: string[];
-  children: (form: TFormState, setForm: Dispatch<SetStateAction<TFormState>>) => ReactElement
+  children: 
+  (
+    form: IEntityFormState<TForm>, 
+    setForm: Dispatch<SetStateAction<IEntityFormState<TForm>>>, 
+    toggleSelect: (currentValue: boolean, entityChecked: string) => void, 
+    getDocID: GetDocIDFunc,
+    entitiesSelected: string[],
+    entities: T[] | undefined
+  ) => ReactElement
 }
 
-export default function Table<T extends IDocument,TFormState extends IEntityFormState<TForm>, TForm extends WithImage>({data,formState, fetchUri,entity,columns, children}: PropsWithChildren<TableProps<T, TFormState>>) {
+export default function Table<T extends IDocument,TForm extends WithImage>({data,formState, fetchUri,entity,columns, children}: PropsWithChildren<TableProps<T, TForm>>) {
   const [entities, setEntities] = React.useState(data);
   const [entitiesSelected, setEntitiesSelected] = React.useState<string[]>([]);
-  const [form, setForm] = React.useState<TFormState>(formState);
+  const [form, setForm] = React.useState<IEntityFormState<TForm>>(formState);
   const client = useClient();
   const { getDocID, getDocObjID } = useGetDoc();
 
@@ -38,14 +47,29 @@ export default function Table<T extends IDocument,TFormState extends IEntityForm
       isUpdating: form.isUpdating,
       uri: fetchUri
     })
+    setEntities(updatedState)
+    setForm(formState)
+    setEntitiesSelected([])
   };
-  const onDelete = () => {};
-  const cancelUpdate = () => {};
+  const onDelete = async () => {
+    const updatedState = await client.delete<T>({entityIDS: entitiesSelected, entities, uri: fetchUri})
+    setEntities(updatedState)
+    setForm(formState)
+  };
+  const cancelUpdate = () => setForm({...form, open: false, isUpdating: false});
   const handleInsert = () => setForm({...form, open: true, isUpdating: false});
-  const handleUpdate = () => {};
-  const toggleSelect = () => {};
+  const handleUpdate = () => {
+    if (entities){
+      const entity : T | undefined = getDocObjID(entities, entitiesSelected[0])
+      if (entity) setForm({data: (entity as any), open: true, isUpdating: true})
+    }
+  };
+  const toggleSelect = (currentValue: boolean, entityChecked: string) => {
+    if (currentValue) setEntitiesSelected([...entitiesSelected, entityChecked])
+    else setEntitiesSelected(entitiesSelected.filter(entitySelected => entitySelected !== entityChecked))
+  };
 
-  console.log("ENTITIES : ", entities)
+  console.log("STATE : ", entities)
 
   return (
     <Paper style={{ width: "100%" }}>
@@ -65,7 +89,7 @@ export default function Table<T extends IDocument,TFormState extends IEntityForm
                 <TableBody>
                     {
 
-                        children && children(form, setForm)
+                        children && children(form, setForm, toggleSelect, getDocID, entitiesSelected, entities)
                     }
                 </TableBody>
           </MuiTable>

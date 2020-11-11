@@ -3,7 +3,7 @@ import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableContainer from "@material-ui/core/TableContainer";
-import { IProperty } from "../../types";
+import { IEntityFormState, IProperty } from "../../types";
 import useGetDoc from "../../hooks/useGeDoc";
 import PropertyHead from "./PropertyHead";
 import PropertyCell from "./PropertyCell";
@@ -20,7 +20,7 @@ interface PropertyTableProps {
 export default function PropertyTable({ data }: PropertyTableProps) {
   const [properties, setProperties] = React.useState(data);
   const [propertiesSelected, setPropertiesSelected] = React.useState<string[]>([])
-  const [form, setForm] = React.useState<IPropertyFormState>(initFormState);
+  const [form, setForm] = React.useState<IEntityFormState<IPropertyForm>>(initFormState);
   const client = useClient()
   const {getDocID, getDocObjID} = useGetDoc()
 

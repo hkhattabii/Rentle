@@ -5,12 +5,13 @@ import Select from "../UI/Select";
 import Input from "../UI/Input";
 import BedroomForm from "./BedroomForm";
 import ImageUploader from "../UI/ImageUploader";
-import { IPropertyFormState } from "./types";
+import { IPropertyForm, IPropertyFormState } from "./types";
 import { TextField } from "@material-ui/core";
+import { IEntityFormState } from "../../types";
 
 interface PropertyFormProps {
-  form: IPropertyFormState
-  setForm: React.Dispatch<React.SetStateAction<IPropertyFormState>>
+  form: IEntityFormState<IPropertyForm>
+  setForm: React.Dispatch<React.SetStateAction<IEntityFormState<IPropertyForm>>>
 }
 
 export default function PropertyForm({ form, setForm}: PropertyFormProps) {

@@ -1,5 +1,6 @@
-export interface IPropertyForm {
-    image: File | string | undefined,
+import { WithImage } from "../../hooks/types";
+
+export interface IPropertyForm extends WithImage {
     type: string,
     size: number,
     sizeLivingRoom: number,
@@ -14,8 +15,8 @@ export interface IPropertyForm {
 }
 
 
-export interface IPropertyFormState {
+export interface IPropertyFormState<EntityForm extends WithImage> {
     open: boolean,
     isUpdating: boolean,
-    data: IPropertyForm
+    data: EntityForm
 }

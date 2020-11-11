@@ -9,11 +9,9 @@ export interface ILocation {
     zipcode: string,
     city: string,
     country: string,
-    [key: string]: string
 }
 
-interface IPerson {
-    id: string
+interface IPerson extends IDocument {
     gender: string,
     name: string,
     surname: string,
@@ -41,6 +39,7 @@ export interface IProperty extends IDocument {
     size: number,
     sizeLivingRoom: number,
     sizeKitchen: number,
+    sizeBedrooms: number,
     bedrooms: number[],
     bedroomCount: number,
     floorNumber: number,
@@ -48,7 +47,6 @@ export interface IProperty extends IDocument {
     charges: number,
     address: ILocation,
     leasedBy: IOccupant
-    [key: string] : string | number | ILocation | IOccupant
 }
 
 export interface IAPIRES<T = undefined> {
@@ -61,11 +59,6 @@ export interface IAPIRES<T = undefined> {
 export interface IFetchState<T> {
     loading: boolean
     data: T | undefined
-}
-
-export interface IEntityFormState {
-    open: boolean,
-    isUpdating: boolean
 }
 
 export interface IEntityFormState<TForm> {

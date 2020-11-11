@@ -1,6 +1,7 @@
-import { IPropertyFormState } from "./types";
+import { IEntityFormState } from "../../types";
+import { IPropertyForm } from "./types";
 
-const initState: IPropertyFormState = {
+const initState: IEntityFormState<IPropertyForm> = {
   open: false,
   isUpdating: false,
   data: {
