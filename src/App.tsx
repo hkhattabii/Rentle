@@ -2,15 +2,13 @@ import React from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import CssBaseLine from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
-import Sidebar from "./components/Sidebar/Sidebar";
-import Property from "./pages/Property";
+import Routes from "./Routes";
 
 const useStyles = makeStyles((theme) => ({
   app: {
+    display: "flex",
+    flexDirection: "column",
     height: "100vh",
-    width: "100%",
-    maxHeight: "100vh",
-    maxWidth: "100%",
   },
 }));
 
@@ -19,7 +17,7 @@ export default function App() {
   return (
     <Grid container className={classes.app}>
       <CssBaseLine />
-      <Property />
+      <Routes />
     </Grid>
   );
 }

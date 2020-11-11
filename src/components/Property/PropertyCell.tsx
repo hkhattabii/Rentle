@@ -46,7 +46,7 @@ export default function PropertyCell({onSelect, selected, property}: PropertyCel
       <TableCell align="center">{property.address.city}</TableCell>
       <TableCell align="center">{property.address.country}</TableCell>
       <TableCell align="center">
-        <Avatar alt="tqt" src={property.leasedBy && property.leasedBy.avatar} />
+        <Avatar alt="tqt" src={property.leasedBy && property.leasedBy.image} />
       </TableCell>
     </TableRow>
   );

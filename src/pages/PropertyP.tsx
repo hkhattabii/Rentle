@@ -6,7 +6,7 @@ import PropertyTable from '../components/Property/PropertyTable'
 import { IFetchState, IProperty } from "../types";
 
 const useStyles = makeStyles((theme) => ({
-  realEstateList: {
+  propertyList: {
     backgroundColor: "#efefef",
     width: "100%",
     maxHeight: "100vh",
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function RealEstateListP() {
+export default function PropertyP() {
   const classes = useStyles();
   const [realEstates, setRealEstates] = React.useState<IFetchState<IProperty[]>>({loading: true, data: undefined})
 
@@ -36,7 +36,7 @@ export default function RealEstateListP() {
 
 
   return (
-    <Grid container className={classes.realEstateList}>
+    <Grid container className={classes.propertyList}>
       <Grid item container direction="column" alignItems="flex-start">
         <PropertyTable data={realEstates.data} />
       </Grid>

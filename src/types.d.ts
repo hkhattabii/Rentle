@@ -10,8 +10,27 @@ export interface ILocation {
     [key: string]: string
 }
 
-export interface IOccupant {
-    avatar: string
+interface IPerson {
+    id: string
+    gender: string,
+    name: string,
+    surname: string,
+    email: string,
+    gsm: string,
+    image: string,
+    address: ILocation
+}
+
+export interface IGuarantor extends IPerson {
+    occupant: IOccupant
+}
+
+export interface IOccupant extends IPerson {
+    id: string, 
+    propertyID: string,
+    nationalRegistry: string,
+    birthDate: string,
+    guarantor: IGuarantor,
 }
 
 export interface IProperty extends IDocument {    
@@ -40,4 +59,9 @@ export interface IAPIRES<T = undefined> {
 export interface IFetchState<T> {
     loading: boolean
     data: T | undefined
+}
+
+export interface IEntityFormState {
+    open: boolean,
+    isUpdating: boolean
 }
