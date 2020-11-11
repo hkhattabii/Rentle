@@ -17,8 +17,8 @@ export default function Sidebar() {
   return (
     <header className={classes.sidebar}>
       <NavItem label="Biens" to="/properties" />
-      <NavItem label="Locataires" to="/properties" />
       <NavItem label="Guarants" to="/guarantors" />
+      <NavItem label="Locataires" to="/occupants" />
       <NavItem label="Bails" to="/properties" />
       <NavItem label="Notifications" to="/properties" />
       <NavItem label="Génération" to="/generations" />

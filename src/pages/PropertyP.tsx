@@ -6,7 +6,7 @@ import PropertyTable from '../components/Property/PropertyTable'
 import { IFetchState, IProperty } from "../types";
 
 const useStyles = makeStyles((theme) => ({
-  realEstateList: {
+  propertyList: {
     backgroundColor: "#efefef",
     width: "100%",
     maxHeight: "100vh",
@@ -36,7 +36,7 @@ export default function PropertyP() {
 
 
   return (
-    <Grid container className={classes.realEstateList}>
+    <Grid container className={classes.propertyList}>
       <Grid item container direction="column" alignItems="flex-start">
         <PropertyTable data={realEstates.data} />
       </Grid>

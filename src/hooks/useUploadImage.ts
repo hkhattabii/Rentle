@@ -2,7 +2,7 @@ import { message } from 'antd'
 import axios from 'axios'
 
 export default () => {
-    return async (file: File | string |undefined) => {
+    return async (file: File | string | undefined) => {
         if (!file || typeof file === "string") return ""
         const formData = new FormData()
         formData.append("file", file)

@@ -9,6 +9,7 @@ import PropertyHead from "./PropertyHead";
 import PropertyCell from "./PropertyCell";
 import PropertyForm from "./PropertyForm";
 import PropertyToolbar from "./PropertyToolbar";
+import TableToolbar from '../UI/TableToolbar'
 import { IPropertyFormState } from "./types";
 import initFormState from "./formState";
 import usePropertyClient from "../../hooks/usePropertyClient";
@@ -46,7 +47,7 @@ export default function PropertyTable({ data }: PropertyTableProps) {
 
   return (
     <Paper style={{width: '100%'}}>
-      <PropertyToolbar 
+      <TableToolbar 
         formOpen={form.open}
         isUpdating={form.isUpdating} 
         selectedCount={propertiesSelected.length} 
