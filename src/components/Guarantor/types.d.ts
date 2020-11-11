@@ -11,17 +11,6 @@ export interface IPersonForm {
     [key: string] : string |  ILocation 
 }
 
-export interface IOccupantForm extends IPersonForm {
-    propertyID: string,
-    nationalRegistry: string,
-    birthDate: string,
-    guarantor?: IGuarantorForm,
-}
+
 
 export interface IGuarantorForm extends IPersonForm {}
-
-export interface IGuarantorFormState extends IEntityFormState {
-    open: boolean;
-    isUpdating: boolean;
-    data: IGuarantorForm
-}

@@ -4,6 +4,10 @@ import useUploadImage from "./useUploadImage";
 import { IAPIRES, IDocument } from "../types";
 import { WithImage } from "./types";
 
+interface GetParams {
+  uri: string
+}
+
 interface DeleteParams<TEntity extends IDocument> {
   entityIDS: string[],
   entities: TEntity[] | undefined,
@@ -13,16 +17,20 @@ interface DeleteParams<TEntity extends IDocument> {
 interface InsertUpdateParams<TForm extends WithImage, TEntity extends IDocument> {
   form: TForm,
   entities: TEntity[] | undefined
-  entity: "guarant"
+  entity: "guarant" | "bien" | "locataire"
   isUpdating: boolean,
   uri: string
 }
 
-export default function useGuarantorClient() {
+export default function useClient() {
   const uploadImageFile = useUploadImage();
 
   return {
-    delete: async function onDelete<TEntity extends IDocument>({entityIDS, entities, uri}: DeleteParams<TEntity>) {
+    getAll: async function <TEntity extends IDocument>({uri}: GetParams) {
+      const res = (await axios.get<TEntity[]>(uri)).data
+      return res
+    },
+    delete: async function <TEntity extends IDocument>({entityIDS, entities, uri}: DeleteParams<TEntity>) {
       message.loading("Suppression ...");
       const res = (
         await axios.delete<IAPIRES>(uri, { data: entityIDS })
@@ -48,9 +56,8 @@ export default function useGuarantorClient() {
         message.error(res.message);
         return;
       } else if (res.data) {
-        console.log("RES : ", res.data)
         message.success(res.message);
-        return isUpdating ? entities.map(entity => res.data && entity.id === res.data.id ? res.data : entity)    : [...entities, res.data];
+        return isUpdating ? entities.map(entity => res.data && entity.id === res.data.id ? res.data : entity) : [...entities, res.data];
       }
     },
   };

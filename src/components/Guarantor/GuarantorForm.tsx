@@ -4,11 +4,12 @@ import TableRow from "@material-ui/core/TableRow";
 import Select from "../UI/Select";
 import Input from "../UI/Input";
 import ImageUploader from "../UI/ImageUploader";
-import { IGuarantorFormState } from "./types";
+import { IGuarantorForm } from "./types";
+import { IEntityFormState } from "../../types";
 
 interface GuarantorFormProps {
-  form: IGuarantorFormState
-  setForm: React.Dispatch<React.SetStateAction<IGuarantorFormState>>
+  form: IEntityFormState<IGuarantorForm>
+  setForm: React.Dispatch<React.SetStateAction<IEntityFormState<IGuarantorForm>>>
 }
 
 export default function GuarantorForm({ form, setForm}: GuarantorFormProps) {

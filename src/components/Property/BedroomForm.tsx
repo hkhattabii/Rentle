@@ -26,7 +26,7 @@ export default function BedroomForm({ open, onClose, onSubmit, bedroomCount } : 
         onClose()
     }
 
-    console.log(bedrooms)
+
     return (
         <Dialog open={open} onClose={onClose}>
             <DialogTitle>Ajout de {bedroomCount} chambres</DialogTitle>

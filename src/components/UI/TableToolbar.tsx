@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-interface PropertyToolbarProps {
+interface TableToolbarProps {
     formOpen: boolean
     isUpdating: boolean
     handleInsert : () => void
@@ -24,7 +24,7 @@ interface PropertyToolbarProps {
     selectedCount: number
 }
 
-export default function PropertyToolbar({formOpen, isUpdating, handleInsert, onInsertUpdate, handleUpdate, onDelete,cancelUpdate, selectedCount}:PropertyToolbarProps) {
+export default function TableToolbar({formOpen, isUpdating, handleInsert, onInsertUpdate, handleUpdate, onDelete,cancelUpdate, selectedCount}:TableToolbarProps) {
   const classes = useStyles()
   return (
     <Grid container alignItems="center" component={Toolbar}>

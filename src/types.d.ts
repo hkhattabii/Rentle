@@ -1,5 +1,7 @@
+import { WithImage } from "./hooks/types";
 
-export interface IDocument {
+
+export interface IDocument  {
     id: string
 }
 export interface ILocation {
@@ -7,11 +9,9 @@ export interface ILocation {
     zipcode: string,
     city: string,
     country: string,
-    [key: string]: string
 }
 
-interface IPerson {
-    id: string
+interface IPerson extends IDocument {
     gender: string,
     name: string,
     surname: string,
@@ -27,10 +27,10 @@ export interface IGuarantor extends IPerson {
 
 export interface IOccupant extends IPerson {
     id: string, 
-    propertyID: string,
     nationalRegistry: string,
     birthDate: string,
     guarantor: IGuarantor,
+    propertyLeased: IProperty | undefined
 }
 
 export interface IProperty extends IDocument {    
@@ -39,6 +39,7 @@ export interface IProperty extends IDocument {
     size: number,
     sizeLivingRoom: number,
     sizeKitchen: number,
+    sizeBedrooms: number,
     bedrooms: number[],
     bedroomCount: number,
     floorNumber: number,
@@ -46,7 +47,6 @@ export interface IProperty extends IDocument {
     charges: number,
     address: ILocation,
     leasedBy: IOccupant
-    [key: string] : string | number | ILocation | IOccupant
 }
 
 export interface IAPIRES<T = undefined> {
@@ -61,7 +61,8 @@ export interface IFetchState<T> {
     data: T | undefined
 }
 
-export interface IEntityFormState {
+export interface IEntityFormState<TForm> {
     open: boolean,
-    isUpdating: boolean
+    isUpdating: boolean,
+    data: TForm
 }
