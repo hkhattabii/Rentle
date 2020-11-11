@@ -8,11 +8,10 @@ import useGetDoc from "../../hooks/useGeDoc";
 import PropertyHead from "./PropertyHead";
 import PropertyCell from "./PropertyCell";
 import PropertyForm from "./PropertyForm";
-import PropertyToolbar from "./PropertyToolbar";
 import TableToolbar from '../UI/TableToolbar'
-import { IPropertyFormState } from "./types";
+import { IPropertyForm, IPropertyFormState } from "./types";
 import initFormState from "./formState";
-import usePropertyClient from "../../hooks/usePropertyClient";
+import useClient from "../../hooks/useClient";
 
 interface PropertyTableProps {
   data: IProperty[] | undefined;
@@ -22,14 +21,24 @@ export default function PropertyTable({ data }: PropertyTableProps) {
   const [properties, setProperties] = React.useState(data);
   const [propertiesSelected, setPropertiesSelected] = React.useState<string[]>([])
   const [form, setForm] = React.useState<IPropertyFormState>(initFormState);
-  const propertyClient = usePropertyClient()
+  const client = useClient()
   const {getDocID, getDocObjID} = useGetDoc()
 
   const onInsertUpdate = async () => {
-    setProperties(await propertyClient.insertUpdate(form.data, properties, form.isUpdating))
+    const updatedState = await client.insertUpdate<IPropertyForm, IProperty>({
+      form: form.data,
+      entities: properties,
+      entity: "bien",
+      isUpdating: form.isUpdating,
+      uri: "/properties"
+    })
+    setProperties(updatedState)
     setForm(initFormState)
   }
-  const onDelete = async () => setProperties(await propertyClient.delete(propertiesSelected, properties))
+  const onDelete = async () => {
+    const updatedState = await client.delete<IProperty>({entityIDS: propertiesSelected, entities: properties, uri: "/properties"})
+    setProperties(updatedState)
+  } 
 
   const cancelUpdate = () => setForm({...form, open: false, isUpdating: false})
   const handleInsert = () => setForm({...form, open: true})

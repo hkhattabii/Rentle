@@ -7,7 +7,7 @@ import TableBody from "@material-ui/core/TableBody";
 import GuarantorHead from "./GuarantorHead";
 import GuarantorCell from './GuarantorCell'
 import guarantorFormState from "./formState";
-import useGuarantorClient from "../../hooks/useGuarantorClient";
+import useClient from "../../hooks/useClient";
 import useGetDoc from "../../hooks/useGeDoc";
 import { IGuarantor } from "../../types";
 import { IGuarantorForm, IGuarantorFormState } from "./types";
@@ -25,11 +25,11 @@ export default function GuarantorTable({ data }: GuarantorTableProps) {
     []
   );
   const [form, setForm] = React.useState<IGuarantorFormState>(guarantorFormState);
-  const guarantorClient = useGuarantorClient();
+  const client = useClient();
   const { getDocID, getDocObjID } = useGetDoc();
 
   const onInsertUpdate = async () => {
-    const updatedState = await guarantorClient.insertUpdate<IGuarantorForm, IGuarantor>({
+    const updatedState = await client.insertUpdate<IGuarantorForm, IGuarantor>({
       form: form.data,
       entities: guarantors,
       entity: "guarant",
@@ -39,7 +39,7 @@ export default function GuarantorTable({ data }: GuarantorTableProps) {
     setGuarantors(updatedState)
   };
   const onDelete = async () => {
-    const updatedState = await guarantorClient.delete<IGuarantor>({
+    const updatedState = await client.delete<IGuarantor>({
       entityIDS: guarantorsSelected,
       entities: guarantors,
       uri: "/guarantors"

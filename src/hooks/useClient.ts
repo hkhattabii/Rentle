@@ -13,7 +13,7 @@ interface DeleteParams<TEntity extends IDocument> {
 interface InsertUpdateParams<TForm extends WithImage, TEntity extends IDocument> {
   form: TForm,
   entities: TEntity[] | undefined
-  entity: "guarant"
+  entity: "guarant" | "bien"
   isUpdating: boolean,
   uri: string
 }
@@ -41,6 +41,7 @@ export default function useGuarantorClient() {
       const fileURL = isUpdating && typeof form.image === "string" ? form.image :  await uploadImageFile(form.image);
       const body = { ...form, image: fileURL };
       isUpdating ? message.loading(`Mise à jour du ${entity}  ...`) : message.loading(`Insertion du ${entity} ...`);
+      console.log(body)
       const res: IAPIRES<TEntity> = isUpdating
         ? (await axios.put(uri, body)).data
         : (await axios.post(uri, body)).data;
