@@ -92,3 +92,10 @@ export interface IEntityFormState<TForm> {
     isUpdating: boolean,
     data: TForm
 }
+
+
+export interface ITableColumn {
+    label: string,
+    minWidth: number
+}
+

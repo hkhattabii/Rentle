@@ -18,7 +18,7 @@ export default function PropertyCell({onSelect, selected, property}: PropertyCel
         backgroundColor: selected ? "rgba(0,0,0,0.2)" : "initial",
       }}
     >
-      <TableCell style={{ alignItems: "center", justifyContent: "center" }}>
+      <TableCell style={{ alignItems: "center", justifyContent: "center", width: 1  }}>
         <Checkbox
           checked={selected}
           onChange={(e, checked) => onSelect(checked, property.id)}
@@ -32,7 +32,7 @@ export default function PropertyCell({onSelect, selected, property}: PropertyCel
           height="64"
         />
       </TableCell>
-      <TableCell align="center">{property.type}</TableCell>
+      <TableCell align="center" style={{width: 1}}>{property.type}</TableCell>
       <TableCell align="center">{property.size}</TableCell>
       <TableCell align="center">{property.sizeLivingRoom}</TableCell>
       <TableCell align="center">{property.sizeKitchen}</TableCell>

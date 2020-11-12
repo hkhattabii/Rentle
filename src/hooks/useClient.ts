@@ -5,7 +5,8 @@ import { IAPIRES, IDocument } from "../types";
 import { WithImage } from "./types";
 
 interface GetParams {
-  uri: string
+  uri: string,
+  data?: any
 }
 
 interface DeleteParams<TEntity extends IDocument> {
@@ -26,8 +27,8 @@ export default function useClient() {
   const uploadImageFile = useUploadImage();
 
   return {
-    getAll: async function <TEntity extends IDocument>({uri}: GetParams) {
-      const res = (await axios.get<TEntity[]>(uri)).data
+    getAll: async function <TEntity extends IDocument>({uri, data}: GetParams) {
+      const res = (await axios.get<TEntity[]>(uri, {data})).data
       return res
     },
     delete: async function <TEntity extends IDocument>({entityIDS, entities, uri}: DeleteParams<TEntity>) {

@@ -17,6 +17,7 @@ interface TableProps<T extends IDocument, TForm extends WithImage> {
   fetchUri: string,
   entity: "guarant" | "bien" | "locataire" | "bail",
   columns: string[];
+  toolbarComponent?: ReactElement
   children: 
   (
     form: IEntityFormState<TForm>, 
@@ -28,7 +29,7 @@ interface TableProps<T extends IDocument, TForm extends WithImage> {
   ) => ReactElement
 }
 
-export default function Table<T extends IDocument,TForm extends WithImage>({data,formState, fetchUri,entity,columns, children}: PropsWithChildren<TableProps<T, TForm>>) {
+export default function Table<T extends IDocument,TForm extends WithImage>({data,formState, fetchUri,entity,columns,toolbarComponent, children}: PropsWithChildren<TableProps<T, TForm>>) {
   const [entities, setEntities] = React.useState(data);
   const [entitiesSelected, setEntitiesSelected] = React.useState<string[]>([]);
   const [form, setForm] = React.useState<IEntityFormState<TForm>>(formState);
@@ -78,6 +79,7 @@ export default function Table<T extends IDocument,TForm extends WithImage>({data
         cancelUpdate={cancelUpdate}
         onInsertUpdate={onInsertUpdate}
         onDelete={onDelete}
+        component={toolbarComponent}
       />
       <TableContainer style={{height: '80vh'}}>
           <MuiTable>

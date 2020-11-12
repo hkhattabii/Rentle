@@ -3,7 +3,6 @@ import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import Checkbox from "@material-ui/core/Checkbox";
 import Avatar from "@material-ui/core/Avatar";
-import Chip from '@material-ui/core/Chip'
 import { ILease } from "../../types";
 import useMoment, {useDiff} from "../../hooks/useMoment";
 
@@ -16,8 +15,6 @@ type LeaseCellProps =  {
 export default function LeaseCell({onSelect, selected, lease}: LeaseCellProps) {
   const getDate = useMoment()
   const getDiff = useDiff()
-
-  console.log(lease.isFirstMonthPaid)
 
   return (
     <TableRow
@@ -33,10 +30,11 @@ export default function LeaseCell({onSelect, selected, lease}: LeaseCellProps) {
       </TableCell>
       <TableCell align="center">{getDate(lease.beginDate)}</TableCell>
       <TableCell align="center">{getDate(lease.endDate)}</TableCell>
-      <TableCell align="center">{`${getDiff(lease.beginDate, lease.endDate)} mois`}</TableCell>
+      <TableCell align="center">{`${getDiff(lease.beginDate, lease.endDate)} jours`}</TableCell>
+      <TableCell align="center">{`${getDiff(new Date().toISOString(), lease.alarmDate)} jours`}</TableCell>
       <TableCell align="center">{lease.index}</TableCell>
       <TableCell align="center">{lease.warranty}</TableCell>
-      <TableCell align="center">{lease.signatureDate}</TableCell>
+      <TableCell align="center">{getDate(lease.signatureDate)}</TableCell>
       <TableCell align="center">{`[${lease.waterMeter.beginValue};${lease.waterMeter.endValue ? lease.waterMeter.endValue : 0}]`}</TableCell>
       <TableCell align="center">{`[${lease.gasMeter.beginValue};${lease.gasMeter.endValue ? lease.gasMeter.endValue : 0}]`}</TableCell>
       <TableCell align="center">{`[${lease.electricityMeter.beginValue};${lease.electricityMeter.endValue ? lease.electricityMeter.endValue : 0}]`}</TableCell>
