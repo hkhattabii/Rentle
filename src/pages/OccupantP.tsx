@@ -39,9 +39,6 @@ export default function OccupantP() {
     // eslint-disable-next-line 
     }, [])
 
-
-    console.log("Coucou")
-
     if (occupants.loading) return <p>Loading</p>
 
 

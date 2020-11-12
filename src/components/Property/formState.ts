@@ -1,7 +1,7 @@
 import { IEntityFormState } from "../../types";
 import { IPropertyForm } from "./types";
 
-const initState: IEntityFormState<IPropertyForm> = {
+const initPropertyForm: IEntityFormState<IPropertyForm> = {
   open: false,
   isUpdating: false,
   data: {
@@ -25,4 +25,4 @@ const initState: IEntityFormState<IPropertyForm> = {
 
 }
 
-export default initState
+export default initPropertyForm
