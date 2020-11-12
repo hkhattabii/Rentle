@@ -41,10 +41,10 @@ export default function LeaseCell({onSelect, selected, lease}: LeaseCellProps) {
       <TableCell align="center">{`[${lease.gasMeter.beginValue};${lease.gasMeter.endValue ? lease.gasMeter.endValue : 0}]`}</TableCell>
       <TableCell align="center">{`[${lease.electricityMeter.beginValue};${lease.electricityMeter.endValue ? lease.electricityMeter.endValue : 0}]`}</TableCell>
       <TableCell align="center">{lease.isDepositPaid ? "Oui" : "Non"}</TableCell>
-      <TableCell align="center">{lease.depositDate}</TableCell>
+      <TableCell align="center">{lease.depositDate ? getDate(lease.depositDate) : "Non"}</TableCell>
       <TableCell align="center">{lease.isFirstMonthPaid ? "Oui" : "Non"}</TableCell>
-      <TableCell align="center">{lease.visitBeginDate}</TableCell>
-      <TableCell align="center">{lease.visitEndDate}</TableCell>
+      <TableCell align="center">{getDate(lease.visitBeginDate)}</TableCell>
+      <TableCell align="center">{getDate(lease.visitEndDate)}</TableCell>
       <TableCell align="center">
         <img
           alt={`lease-${lease.id}-property-${lease.property.id}`}
