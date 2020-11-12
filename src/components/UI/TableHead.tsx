@@ -14,7 +14,7 @@ export default function TableHead({columns}: TableHeadProps) {
             <TableRow>
                 <TableCell align="center"></TableCell>
                 {
-                    columns.map(column => <TableCell key={column} align="center" style={{ minWidth: 64}}>{column}</TableCell>)
+                    columns.map(column => <TableCell key={column} align="center" style={{ minWidth: 104}}>{column}</TableCell>)
                 }
             </TableRow>
         </MuiTableHead>

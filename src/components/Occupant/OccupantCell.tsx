@@ -57,7 +57,7 @@ export default function OccupantCell({
         {occupant.propertyLeased ? (
           <img
             alt={`occupant-propertyLeased-${occupant.propertyLeased.id}`}
-            src={occupant.image as string}
+            src={occupant.propertyLeased.image as string}
             width="64"
             height="64"
           />

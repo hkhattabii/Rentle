@@ -49,6 +49,30 @@ export interface IProperty extends IDocument {
     leasedBy: IOccupant
 }
 
+export interface ILease extends IDocument {
+    beginDate: string,
+    endDate: string,
+    visitBeginDate: string,
+    visitEndDate: string
+    warranty: number,
+    signatureDate: string,
+    isDepositPaid: boolean,
+    depositDate: string | undefined,
+    index: number,
+    isFirstMonthPaid: striing,
+    gasMeter: IMeter,
+    waterMeter: IMeter,
+    electricityMeter: IMeter,
+    property: IProperty,
+    occupant: IOccupant
+}
+
+
+export interface IMeter {
+    beginValue: number,
+    endValue?: number | undefined
+}
+
 export interface IAPIRES<T = undefined> {
     success?: boolean,
     message?: string

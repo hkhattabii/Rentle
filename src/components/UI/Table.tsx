@@ -8,17 +8,14 @@ import TableBody from "@material-ui/core/TableBody";
 import useClient from "../../hooks/useClient";
 import useGetDoc, {GetDocIDFunc} from "../../hooks/useGeDoc";
 import { IDocument, IEntityFormState } from "../../types";
-import { TableRow } from "@material-ui/core";
-import { IOccupantForm } from "../Occupant/types";
 import { WithImage } from "../../hooks/types";
-import initFormState from "../Guarantor/formState";
 
 
 interface TableProps<T extends IDocument, TForm extends WithImage> {
   data: T[] | undefined;
   formState: IEntityFormState<TForm>;
   fetchUri: string,
-  entity: "guarant" | "bien" | "locataire",
+  entity: "guarant" | "bien" | "locataire" | "bail",
   columns: string[];
   children: 
   (
@@ -69,7 +66,6 @@ export default function Table<T extends IDocument,TForm extends WithImage>({data
     else setEntitiesSelected(entitiesSelected.filter(entitySelected => entitySelected !== entityChecked))
   };
 
-  console.log("STATE : ", entities)
 
   return (
     <Paper style={{ width: "100%" }}>
