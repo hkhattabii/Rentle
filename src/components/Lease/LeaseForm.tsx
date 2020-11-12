@@ -117,8 +117,8 @@ export default function LeaseForm({ form, setForm }: LeaseFormProps) {
       <TableCell align="center">
         <Select
           data={["Oui", "Non"]}
-          currentValue={form.data.isFirstMonthPaid}
-          onChange={handleChange}
+          currentValue={form.data.isFirstMonthPaid ? "Oui" : "Non"}
+          onChange={(name, value) => handleChange(name, (value as string).includes("Oui") ? true : false)}
         />
       </TableCell>
       <TableCell align="center">

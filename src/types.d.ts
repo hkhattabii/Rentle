@@ -59,7 +59,7 @@ export interface ILease extends IDocument {
     isDepositPaid: boolean,
     depositDate: string | undefined,
     index: number,
-    isFirstMonthPaid: striing,
+    isFirstMonthPaid: boolean,
     gasMeter: IMeter,
     waterMeter: IMeter,
     electricityMeter: IMeter,

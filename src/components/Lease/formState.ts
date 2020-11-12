@@ -20,7 +20,7 @@ const leaseFormState: IEntityFormState<ILeaseForm> = {
       beginValue: 0
     },
     depositDate: undefined,
-    isFirstMonthPaid: "Non",
+    isFirstMonthPaid: false,
     visitBeginDate: new Date().toISOString(),
     visitEndDate: new Date().toISOString(),
   },
