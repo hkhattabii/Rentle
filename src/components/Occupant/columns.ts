@@ -1,5 +1,5 @@
 const columns: string[] = [
-  "Image",
+  "Avatar",
   "Genre",
   "prénom",
   "Nom",

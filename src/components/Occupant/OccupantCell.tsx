@@ -2,8 +2,10 @@ import React from "react";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import Checkbox from "@material-ui/core/Checkbox";
-import { IOccupant } from "../../types";
+import Avatar from '@material-ui/core/Avatar'
 import Chip from "@material-ui/core/Chip";
+import { IOccupant } from "../../types";
+
 
 type OccupantCellProps = {
   occupant: IOccupant;
@@ -25,11 +27,9 @@ export default function OccupantCell({
         />
       </TableCell>
       <TableCell>
-        <img
+        <Avatar
           alt={`occupant-${occupant.id}`}
           src={occupant.image as string}
-          width="64"
-          height="64"
         />
       </TableCell>
       <TableCell align="center">{occupant.gender}</TableCell>
@@ -45,11 +45,9 @@ export default function OccupantCell({
       <TableCell align="center">{occupant.address.country}</TableCell>
       <TableCell align="center">
         {occupant.guarantor ? (
-          <img
+          <Avatar
             alt={`occupant-guarantor-${occupant.guarantor.id}`}
             src={occupant.guarantor.image as string}
-            width="64"
-            height="64"
           />
         ) : (
           <Chip label="Aucun" color="secondary" />
