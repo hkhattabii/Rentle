@@ -13,8 +13,6 @@ import ILeaseForm from "./types";
 import DateField from "../UI/DateField";
 import SelectAsync from "../UI/SelectAsync";
 import { MenuItem } from "@material-ui/core";
-import AlarmForm from "./AlarmForm";
-
 interface LeaseFormProps {
   form: IEntityFormState<ILeaseForm>;
   setForm: React.Dispatch<React.SetStateAction<IEntityFormState<ILeaseForm>>>;
@@ -36,8 +34,6 @@ export default function LeaseForm({ form, setForm }: LeaseFormProps) {
     IProperty | undefined
   >(undefined);
 
-  const [alarmOpen, setAlarmOpen] = React.useState(false)
-
   const handleChange = (name: string, value: any) => setForm({ ...form, data: { ...form.data, [name]: value } });
   const handleWaterMeterChange = (name: any, value: any) => 
     setForm({ ...form, data: {...form.data, waterMeter: {beginValue: value}}})
@@ -45,14 +41,9 @@ export default function LeaseForm({ form, setForm }: LeaseFormProps) {
     setForm({ ...form, data: {...form.data, gasMeter: {beginValue: value}}})
   const handleElectricityMeterChange = (name: any, value: any) => 
     setForm({ ...form, data: {...form.data, electricityMeter: {beginValue: value}}})
-  const onAlarmSubmit = (alarm: string | undefined) => {
-    handleChange("alarmDate", alarm)
-    setAlarmOpen(false)
-  }
 
   return (
     <TableRow>
-      {!form.isUpdating && <AlarmForm open={alarmOpen} onClose={() => setAlarmOpen(false)} alarm={form.data.alarmDate} onSubmit={onAlarmSubmit}/>}
       <TableCell />
       <TableCell align="center">
         <DateField
@@ -66,10 +57,16 @@ export default function LeaseForm({ form, setForm }: LeaseFormProps) {
           name="endDate"
           value={form.data.endDate}
           onChange={(value, name) => handleChange(name, value)}
-          onClose={() => setAlarmOpen(true)}
         />
       </TableCell>
-      <TableCell align="center" />
+      <TableCell />
+      <TableCell align="center">
+        <DateField
+          name="alarmDate"
+          value={form.data.alarmDate}
+          onChange={(value, name) => handleChange(name, value)}
+        />
+      </TableCell>
       <TableCell align="center">
         <Input
           name="index"
@@ -182,7 +179,7 @@ export default function LeaseForm({ form, setForm }: LeaseFormProps) {
           onDataFetched={(value) =>
             setOccupants({ data: value, loading: false })
           }
-          fetchUri="/occupants"
+          fetchUri="/occupants/withoutLease"
           messageEmpty="Aucun locataire"
         >
           {occupants.data &&

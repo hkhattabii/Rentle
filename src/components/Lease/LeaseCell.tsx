@@ -30,10 +30,11 @@ export default function LeaseCell({onSelect, selected, lease}: LeaseCellProps) {
       </TableCell>
       <TableCell align="center">{getDate(lease.beginDate)}</TableCell>
       <TableCell align="center">{getDate(lease.endDate)}</TableCell>
-      <TableCell align="center">{`${getDiff(lease.beginDate, lease.endDate)} mois`}</TableCell>
+      <TableCell align="center">{`${getDiff(lease.beginDate, lease.endDate)} jours`}</TableCell>
+      <TableCell align="center">{`${getDiff(new Date().toISOString(), lease.alarmDate)} jours`}</TableCell>
       <TableCell align="center">{lease.index}</TableCell>
       <TableCell align="center">{lease.warranty}</TableCell>
-      <TableCell align="center">{lease.signatureDate}</TableCell>
+      <TableCell align="center">{getDate(lease.signatureDate)}</TableCell>
       <TableCell align="center">{`[${lease.waterMeter.beginValue};${lease.waterMeter.endValue ? lease.waterMeter.endValue : 0}]`}</TableCell>
       <TableCell align="center">{`[${lease.gasMeter.beginValue};${lease.gasMeter.endValue ? lease.gasMeter.endValue : 0}]`}</TableCell>
       <TableCell align="center">{`[${lease.electricityMeter.beginValue};${lease.electricityMeter.endValue ? lease.electricityMeter.endValue : 0}]`}</TableCell>

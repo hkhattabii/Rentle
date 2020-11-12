@@ -43,6 +43,11 @@ export default function LeaseP() {
     // eslint-disable-next-line
   }, []);
 
+
+  const filter = () => {
+     setLeases({...leases, data: leaseAlarms})
+  }
+
   if (leases.loading) return <p>Loading</p>;
 
   return (
@@ -54,7 +59,7 @@ export default function LeaseP() {
           columns={leaseColumns}
           fetchUri="/leases"
           entity="bail"
-          toolbarComponent={<Button variant="contained" style={{backgroundColor: "purple", color:"white"}}>Arrive à échéance ({leaseAlarms.length})</Button>}
+          toolbarComponent={<Button variant="contained" style={{backgroundColor: "purple", color:"white"}} onClick={filter}>Arrive à échéance ({leaseAlarms.length})</Button>}
         >
           {(
             form,
