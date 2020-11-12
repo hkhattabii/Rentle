@@ -21,6 +21,7 @@ const initPropertyForm: IEntityFormState<IPropertyForm> = {
     image: undefined,
     bedrooms: [],
     bedroomCount: 0,
+    occupantID: undefined
   }
 
 }

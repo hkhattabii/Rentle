@@ -4,7 +4,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import { default as MuiSelect } from "@material-ui/core/Select";
 import useClient from '../../hooks/useClient'
-import { IDocument, IFetchState } from "../../types";
+import { IDocument } from "../../types";
 
 
 interface SelectProps<TEntity> {
@@ -12,17 +12,18 @@ interface SelectProps<TEntity> {
   currentValue:  string;
   name?: string
   data: TEntity[] | undefined
+  fetchUri: string
   messageEmpty: string
-  onDataFetched: (name: string, data: TEntity[]) => void
+  onDataFetched: (data: TEntity[]) => void
 }
 
-export default function SelectAsync<TEntity extends IDocument>({ label, currentValue, name, data,messageEmpty, onDataFetched, children }:  PropsWithChildren<SelectProps<TEntity>>) {
+export default function SelectAsync<TEntity extends IDocument>({ label, currentValue, fetchUri, data,messageEmpty, onDataFetched, children }:  PropsWithChildren<SelectProps<TEntity>>) {
   const client = useClient()
 
 
   const fetchEntities = async () => {
-      const entitiesFetched = await client.getAll<TEntity>({uri: "/guarantors"})
-      onDataFetched("guarantors", entitiesFetched)
+      const entitiesFetched = await client.getAll<TEntity>({uri: fetchUri})
+      onDataFetched(entitiesFetched)
   }
 
 

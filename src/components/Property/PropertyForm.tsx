@@ -6,8 +6,9 @@ import Input from "../UI/Input";
 import BedroomForm from "./BedroomForm";
 import ImageUploader from "../UI/ImageUploader";
 import { IPropertyForm, IPropertyFormState } from "./types";
-import { TextField } from "@material-ui/core";
-import { IEntityFormState } from "../../types";
+import { MenuItem, TextField } from "@material-ui/core";
+import { IEntityFormState, IFetchState, IOccupant } from "../../types";
+import SelectAsync from "../UI/SelectAsync";
 
 interface PropertyFormProps {
   form: IEntityFormState<IPropertyForm>
@@ -15,9 +16,11 @@ interface PropertyFormProps {
 }
 
 export default function PropertyForm({ form, setForm}: PropertyFormProps) {
+  const [occupants, setOccupant] = React.useState<IFetchState<IOccupant[]>>({loading: true, data: undefined})
+  const [occupantSelected, setOccupantSelected] = React.useState<IOccupant | undefined>(undefined)
   const [bedroomsOpen, setBedroomsOpen] = React.useState(false);
 
-  const handlePropertyChange = (name: string, value: any) => setForm({ ...form, data: {...form.data, [name]: value }  });
+  const handleOccupantChange = (name: string, value: any) => setForm({ ...form, data: {...form.data, [name]: value }  });
   const handleLocationChange = (name: string, value: any) => setForm({ ...form, data: {...form.data, address: {...form.data.address, [name]: value} }})
   const handleFileChange = (file: File) => setForm({ ...form, data: {...form.data, image: file}  })
 
@@ -32,7 +35,7 @@ export default function PropertyForm({ form, setForm}: PropertyFormProps) {
         bedroomsOpen && <BedroomForm 
         open={bedroomsOpen} 
         onClose={onClose} 
-        onSubmit={bedrooms => handlePropertyChange("bedrooms", bedrooms)}
+        onSubmit={bedrooms => handleOccupantChange("bedrooms", bedrooms)}
         bedroomCount={form.data.bedroomCount} />
       }
       <TableCell />
@@ -44,7 +47,7 @@ export default function PropertyForm({ form, setForm}: PropertyFormProps) {
           name="type"
           data={["Maison", "Appartement", "Chambre"]}
           currentValue={form.data.type}
-          onChange={handlePropertyChange}
+          onChange={handleOccupantChange}
         />
       </TableCell>
       <TableCell align="center">
@@ -53,7 +56,7 @@ export default function PropertyForm({ form, setForm}: PropertyFormProps) {
           variant="standard"
           type="number"
           value={form.data.size}
-          onChange={handlePropertyChange}
+          onChange={handleOccupantChange}
         />
       </TableCell>
       <TableCell align="center">
@@ -62,7 +65,7 @@ export default function PropertyForm({ form, setForm}: PropertyFormProps) {
           variant="standard"
           type="number"
           value={form.data.sizeLivingRoom}
-          onChange={handlePropertyChange}
+          onChange={handleOccupantChange}
         />
       </TableCell>
       <TableCell align="center">
@@ -71,7 +74,7 @@ export default function PropertyForm({ form, setForm}: PropertyFormProps) {
           variant="standard"
           type="number"
           value={form.data.sizeKitchen}
-          onChange={handlePropertyChange}
+          onChange={handleOccupantChange}
         />
       </TableCell>
       <TableCell align="center">
@@ -88,7 +91,7 @@ export default function PropertyForm({ form, setForm}: PropertyFormProps) {
           variant="standard"
           type="number"
           value={form.data.bedroomCount}
-          onChange={handlePropertyChange}
+          onChange={handleOccupantChange}
         />
       </TableCell>
       <TableCell align="center">
@@ -97,7 +100,7 @@ export default function PropertyForm({ form, setForm}: PropertyFormProps) {
           variant="standard"
           type="number"
           value={form.data.floorNumber}
-          onChange={handlePropertyChange}
+          onChange={handleOccupantChange}
         />
       </TableCell>
       <TableCell align="center">
@@ -106,7 +109,7 @@ export default function PropertyForm({ form, setForm}: PropertyFormProps) {
           variant="standard"
           type="number"
           value={form.data.price}
-          onChange={handlePropertyChange}
+          onChange={handleOccupantChange}
         />
       </TableCell>
       <TableCell align="center">
@@ -115,7 +118,7 @@ export default function PropertyForm({ form, setForm}: PropertyFormProps) {
           variant="standard"
           type="number"
           value={form.data.charges}
-          onChange={handlePropertyChange}
+          onChange={handleOccupantChange}
         />
       </TableCell>
       <TableCell align="center">
@@ -149,6 +152,35 @@ export default function PropertyForm({ form, setForm}: PropertyFormProps) {
           value={form.data.address.country}
           onChange={handleLocationChange}
         />
+      </TableCell>
+      <TableCell align="center">
+        <SelectAsync
+          data={occupants.data}
+          currentValue={
+            occupantSelected 
+              ? `${occupantSelected.name} ${occupantSelected.surname}`
+              : ""
+          }
+          onDataFetched={value => setOccupant({data: value, loading: false})}
+          fetchUri="/occupants"
+          messageEmpty="Aucun locataire"
+        >
+          {
+            occupants.data && occupants.data.map(occupant => (
+              <MenuItem
+                key={occupant.id}
+                value={`${occupant.name} ${occupant.surname}`}
+                onClick={() => {
+                  setOccupantSelected(occupant)
+                  handleOccupantChange("occupantID", occupant.id)
+                }}
+              >
+                {`${occupant.name} ${occupant.surname}`}
+              </MenuItem>
+
+            ))
+          }
+        </SelectAsync>
       </TableCell>
     </TableRow>
   );
