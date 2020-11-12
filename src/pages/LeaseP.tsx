@@ -64,6 +64,7 @@ export default function LeaseP() {
               }
               {entities && 
                 entities.map((lease) => {
+                  console.log(lease)
                   const isSelected = getDocID(leasesSelected, lease.id)
                   if(form.open && form.isUpdating && leasesSelected[0] === lease.id) return <LeaseForm key={lease.id} form={form} setForm={setForm} />
                   return (

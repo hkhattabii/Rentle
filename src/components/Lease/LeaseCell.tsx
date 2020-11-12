@@ -16,6 +16,9 @@ type LeaseCellProps =  {
 export default function LeaseCell({onSelect, selected, lease}: LeaseCellProps) {
   const getDate = useMoment()
   const getDiff = useDiff()
+
+  console.log(lease.isFirstMonthPaid)
+
   return (
     <TableRow
       style={{
@@ -37,11 +40,10 @@ export default function LeaseCell({onSelect, selected, lease}: LeaseCellProps) {
       <TableCell align="center">{`[${lease.waterMeter.beginValue};${lease.waterMeter.endValue}]`}</TableCell>
       <TableCell align="center">{`[${lease.gasMeter.beginValue};${lease.gasMeter.endValue}]`}</TableCell>
       <TableCell align="center">{`[${lease.electricityMeter.beginValue};${lease.electricityMeter.endValue}]`}</TableCell>
-      <TableCell align="center">{lease.isDepositPaid}</TableCell>
+      <TableCell align="center">{lease.isDepositPaid ? "Oui" : "Non"}</TableCell>
       <TableCell align="center">{lease.depositDate}</TableCell>
-      <TableCell align="center">{lease.isFirstMonthPaid}</TableCell>
+      <TableCell align="center">{lease.isFirstMonthPaid ? "Oui" : "Non"}</TableCell>
       <TableCell align="center">{lease.visitBeginDate}</TableCell>
-      <TableCell align="center">{lease.visitEndDate}</TableCell>
       <TableCell align="center">{lease.visitEndDate}</TableCell>
       <TableCell align="center">
         <img

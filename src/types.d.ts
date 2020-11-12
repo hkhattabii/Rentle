@@ -31,6 +31,7 @@ export interface IOccupant extends IPerson {
     birthDate: string,
     guarantor: IGuarantor,
     propertyLeased: IProperty | undefined
+    lease: ILease | undefined
 }
 
 export interface IProperty extends IDocument {    

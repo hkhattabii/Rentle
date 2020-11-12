@@ -35,14 +35,15 @@ export default function LeaseForm({ form, setForm }: LeaseFormProps) {
     IProperty | undefined
   >(undefined);
 
-  const handleChange = (name: string, value: any) =>
-    setForm({ ...form, data: { ...form.data, [name]: value } });
+  const handleChange = (name: string, value: any) => setForm({ ...form, data: { ...form.data, [name]: value } });
   const handleWaterMeterChange = (name: any, value: any) => 
     setForm({ ...form, data: {...form.data, waterMeter: {beginValue: value}}})
   const handleGasMeterChange = (name: any, value: any) => 
     setForm({ ...form, data: {...form.data, gasMeter: {beginValue: value}}})
   const handleElectricityMeterChange = (name: any, value: any) => 
     setForm({ ...form, data: {...form.data, electricityMeter: {beginValue: value}}})
+
+
 
   return (
     <TableRow>
@@ -116,9 +117,12 @@ export default function LeaseForm({ form, setForm }: LeaseFormProps) {
       </TableCell>
       <TableCell align="center">
         <Select
+          name="isFirstMonthPaid"
           data={["Oui", "Non"]}
           currentValue={form.data.isFirstMonthPaid ? "Oui" : "Non"}
-          onChange={(name, value) => handleChange(name, (value as string).includes("Oui") ? true : false)}
+          onChange={(name, value) => {
+            handleChange(name, (value as string).includes("Oui") ? true : false)
+          }}
         />
       </TableCell>
       <TableCell align="center">

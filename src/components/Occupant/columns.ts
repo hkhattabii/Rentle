@@ -13,6 +13,7 @@ const columns: string[] = [
   "Pays",
   "Guarant",
   "Bien loué",
+  "Contrat de bail"
 ];
 
 export default columns;
