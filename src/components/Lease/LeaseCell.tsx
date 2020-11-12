@@ -37,9 +37,9 @@ export default function LeaseCell({onSelect, selected, lease}: LeaseCellProps) {
       <TableCell align="center">{lease.index}</TableCell>
       <TableCell align="center">{lease.warranty}</TableCell>
       <TableCell align="center">{lease.signatureDate}</TableCell>
-      <TableCell align="center">{`[${lease.waterMeter.beginValue};${lease.waterMeter.endValue}]`}</TableCell>
-      <TableCell align="center">{`[${lease.gasMeter.beginValue};${lease.gasMeter.endValue}]`}</TableCell>
-      <TableCell align="center">{`[${lease.electricityMeter.beginValue};${lease.electricityMeter.endValue}]`}</TableCell>
+      <TableCell align="center">{`[${lease.waterMeter.beginValue};${lease.waterMeter.endValue ? lease.waterMeter.endValue : 0}]`}</TableCell>
+      <TableCell align="center">{`[${lease.gasMeter.beginValue};${lease.gasMeter.endValue ? lease.gasMeter.endValue : 0}]`}</TableCell>
+      <TableCell align="center">{`[${lease.electricityMeter.beginValue};${lease.electricityMeter.endValue ? lease.electricityMeter.endValue : 0}]`}</TableCell>
       <TableCell align="center">{lease.isDepositPaid ? "Oui" : "Non"}</TableCell>
       <TableCell align="center">{lease.depositDate}</TableCell>
       <TableCell align="center">{lease.isFirstMonthPaid ? "Oui" : "Non"}</TableCell>
