@@ -9,6 +9,7 @@ export default interface ILeaseForm {
     waterMeter: IMeter,
     gasMeter: IMeter,
     electricityMeter: IMeter,
+    alarmDate: string | undefined,
     depositDate: string | undefined,
     isFirstMonthPaid: boolean,
     visitBeginDate: string,
