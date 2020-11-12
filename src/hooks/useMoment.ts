@@ -16,6 +16,6 @@ export function useDiff(): (beginDate: string, endDate: string) => number {
     return (beginDate, endDate) => {
         const momentBegin = moment(getDateByTimeZone(beginDate))
         const momentEnd = moment(getDateByTimeZone(endDate))
-        return momentEnd.diff(momentBegin)
+        return momentEnd.diff(momentBegin, "month")
     }
 }
