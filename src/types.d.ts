@@ -64,6 +64,7 @@ export interface ILease extends IDocument {
     gasMeter: IMeter,
     waterMeter: IMeter,
     electricityMeter: IMeter,
+    alarmDate: string,
     property: IProperty,
     occupant: IOccupant
 }

@@ -19,6 +19,7 @@ const leaseFormState: IEntityFormState<ILeaseForm> = {
     electricityMeter: {
       beginValue: 0
     },
+    alarmDate: undefined,
     depositDate: undefined,
     isFirstMonthPaid: false,
     visitBeginDate: new Date().toISOString(),

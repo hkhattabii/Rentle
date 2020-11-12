@@ -15,27 +15,30 @@ type DateFieldProps = {
   name?: string;
   value: string | undefined;
   disabled?: boolean;
-  onChange: (value: string | unknown, name: string) => void;
+  onClose?: () => void
+  onChange: (value: string | undefined, name: string) => void;
 };
 
-const DateField: React.FC<DateFieldProps> = ({name,value,disabled,onChange}) => {
+const DateField: React.FC<DateFieldProps> = ({name,value,disabled,onClose, onChange}) => {
   const classes = useStyles()
 
   const handleChange = (date: Date | null) => {
-    onChange(date, name ? name : "");
+    onChange(date?.toISOString(), name ? name : "");
   };
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <KeyboardDatePicker
         disableToolbar
-        variant="inline"
+        variant="dialog"
         name={name}
         format="dd/MM/yyyy"
         margin="dense"
         value={value}
         onChange={handleChange}
         disabled={disabled}
+        InputProps={{disabled: true}}
+        onClose={onClose}
         fullWidth
         className={classes.root}
       />
