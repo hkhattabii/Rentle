@@ -65,6 +65,9 @@ export default function OccupantCell({
           <Chip label="Aucun" color="secondary" />
         )}
       </TableCell>
+      <TableCell align="center">
+        <Chip label={occupant.lease ? "Signé" : "Non signé"} style={{backgroundColor: occupant.lease ? "green" : "red", color: "white"}} />
+      </TableCell>
     </TableRow>
   );
 }
