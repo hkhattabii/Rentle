@@ -1,7 +1,7 @@
 import { IEntityFormState } from "../../types";
 import { IGuarantorForm } from "./types";
 
-const initFormState: IEntityFormState<IGuarantorForm> = {
+const initLeaseFormState: IEntityFormState<IGuarantorForm> = {
   open: false,
   isUpdating: false,
   data: {
@@ -20,4 +20,4 @@ const initFormState: IEntityFormState<IGuarantorForm> = {
   },
 };
 
-export default initFormState;
+export default initLeaseFormState;

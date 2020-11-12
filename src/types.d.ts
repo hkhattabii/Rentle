@@ -31,6 +31,7 @@ export interface IOccupant extends IPerson {
     birthDate: string,
     guarantor: IGuarantor,
     propertyLeased: IProperty | undefined
+    lease: ILease | undefined
 }
 
 export interface IProperty extends IDocument {    
@@ -47,6 +48,30 @@ export interface IProperty extends IDocument {
     charges: number,
     address: ILocation,
     leasedBy: IOccupant
+}
+
+export interface ILease extends IDocument {
+    beginDate: string,
+    endDate: string,
+    visitBeginDate: string,
+    visitEndDate: string
+    warranty: number,
+    signatureDate: string,
+    isDepositPaid: boolean,
+    depositDate: string | undefined,
+    index: number,
+    isFirstMonthPaid: boolean,
+    gasMeter: IMeter,
+    waterMeter: IMeter,
+    electricityMeter: IMeter,
+    property: IProperty,
+    occupant: IOccupant
+}
+
+
+export interface IMeter {
+    beginValue: number,
+    endValue?: number | undefined
 }
 
 export interface IAPIRES<T = undefined> {

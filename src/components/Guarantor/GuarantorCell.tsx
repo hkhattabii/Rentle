@@ -3,7 +3,8 @@ import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import Checkbox from "@material-ui/core/Checkbox";
 import Avatar from "@material-ui/core/Avatar";
-import { IGuarantor, IProperty } from "../../types";
+import Chip from '@material-ui/core/Chip'
+import { IGuarantor } from "../../types";
 
 type GuarantorCellProps =  {
     guarantor: IGuarantor
@@ -25,11 +26,9 @@ export default function GuarantorCell({onSelect, selected, guarantor}: Guarantor
         />
       </TableCell>
       <TableCell align="center">
-        <img
+        <Avatar
           alt={`guarantor-${guarantor.id}`}
           src={guarantor.image as string}
-          width="64"
-          height="64"
         />
       </TableCell>
       <TableCell align="center">{guarantor.gender}</TableCell>
@@ -42,7 +41,11 @@ export default function GuarantorCell({onSelect, selected, guarantor}: Guarantor
       <TableCell align="center">{guarantor.address.city}</TableCell>
       <TableCell align="center">{guarantor.address.country}</TableCell>
       <TableCell align="center">
-        <Avatar alt="tqt" src={guarantor.occupant && guarantor.occupant.image} />
+        {
+          guarantor.occupant ? 
+          <Avatar alt="tqt" src={guarantor.occupant.image} /> : 
+          <Chip label="Aucun" color="secondary" />
+        }
       </TableCell>
     </TableRow>
   );

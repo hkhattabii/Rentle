@@ -11,6 +11,7 @@ export interface IPropertyForm extends WithImage {
     price: number,
     charges: number,
     address: ILocation,
+    occupantID: string | undefined
     [key: string] : string | number | ILocation | IOccupant
 }
 

@@ -17,7 +17,7 @@ interface DeleteParams<TEntity extends IDocument> {
 interface InsertUpdateParams<TForm extends WithImage, TEntity extends IDocument> {
   form: TForm,
   entities: TEntity[] | undefined
-  entity: "guarant" | "bien" | "locataire"
+  entity: "guarant" | "bien" | "locataire" | "bail"
   isUpdating: boolean,
   uri: string
 }

@@ -19,7 +19,7 @@ export default function Sidebar() {
       <NavItem label="Biens" to="/properties" />
       <NavItem label="Guarants" to="/guarantors" />
       <NavItem label="Locataires" to="/occupants" />
-      <NavItem label="Bails" to="/properties" />
+      <NavItem label="Bails" to="/leases" />
       <NavItem label="Notifications" to="/properties" />
       <NavItem label="Génération" to="/generations" />
     </header>

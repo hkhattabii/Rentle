@@ -135,16 +135,17 @@ export default function OccupantForm({ form, setForm }: OccupantFormProps) {
               ? `${guarantorSelected.name} ${guarantorSelected.surname}`
               : ""
           }
-          onDataFetched={(name, value) =>
+          onDataFetched={value =>
             setGuarantors({ data: value, loading: false })
           }
+          fetchUri="/guarantors"
           messageEmpty="Aucun garants"
         >
           {guarantors.data &&
             guarantors.data.map((guarantor) => (
               <MenuItem
-                value={`${guarantor.name} ${guarantor.surname}`}
                 key={guarantor.id}
+                value={`${guarantor.name} ${guarantor.surname}`}
                 onClick={() => {
                   setGuarantorSelected(guarantor)
                   handleOccupantChange("guarantorID", guarantor.id)

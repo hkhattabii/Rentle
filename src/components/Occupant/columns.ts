@@ -1,5 +1,5 @@
 const columns: string[] = [
-  "Image",
+  "Avatar",
   "Genre",
   "prénom",
   "Nom",
@@ -13,6 +13,7 @@ const columns: string[] = [
   "Pays",
   "Guarant",
   "Bien loué",
+  "Contrat de bail"
 ];
 
 export default columns;
