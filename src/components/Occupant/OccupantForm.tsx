@@ -1,9 +1,8 @@
 import { MenuItem, TextField } from "@material-ui/core";
-import Avatar from "@material-ui/core/Avatar";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import React, { Dispatch, SetStateAction } from "react";
-import { IEntityFormState, IFetchState, IGuarantor, IProperty } from "../../types";
+import { IEntityFormState, IFetchState, IGuarantor } from "../../types";
 import ImageUploader from "../UI/ImageUploader";
 import Input from "../UI/Input";
 import Select from "../UI/Select";

@@ -1,7 +1,8 @@
 import React from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import List from "@material-ui/core/List";
 import NavItem from "./NavItem";
+import { useDispatch, useSelector } from "react-redux";
+import { IAlarmHubState } from "../../store/types";
 
 const useStyles = makeStyles((theme) => ({
   sidebar: {
@@ -14,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Sidebar() {
   const classes = useStyles();
+
   return (
     <header className={classes.sidebar}>
       <NavItem label="Biens" to="/properties" />

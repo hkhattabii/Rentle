@@ -1,4 +1,4 @@
-import React from "react";
+import React, {ReactElement} from "react";
 import makeStyles from '@material-ui/core/styles/makeStyles'
 import Grid from '@material-ui/core/Grid'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -22,9 +22,10 @@ interface TableToolbarProps {
     onInsertUpdate: () => void
     onDelete: () => void
     selectedCount: number
+    component?: ReactElement
 }
 
-export default function TableToolbar({formOpen, isUpdating, handleInsert, onInsertUpdate, handleUpdate, onDelete,cancelUpdate, selectedCount}:TableToolbarProps) {
+export default function TableToolbar({formOpen, isUpdating, handleInsert, onInsertUpdate, handleUpdate, onDelete,cancelUpdate, selectedCount, component}:TableToolbarProps) {
   const classes = useStyles()
   return (
     <Grid container alignItems="center" component={Toolbar}>
@@ -61,6 +62,9 @@ export default function TableToolbar({formOpen, isUpdating, handleInsert, onInse
           Supprimer
         </Button>
       )}
+      {
+        component && component
+      }
     </Grid>
   );
 }

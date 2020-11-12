@@ -8,6 +8,9 @@ import initLeaseFormState from "../components/Lease/formState";
 import leaseColumns from "../components/Lease/columns";
 import LeaseCell from "../components/Lease/LeaseCell";
 import LeaseForm from "../components/Lease/LeaseForm";
+import { Button } from "@material-ui/core";
+import { useSelector } from "react-redux";
+import { IAlarmHubState } from "../store/types";
 
 const useStyles = makeStyles((theme) => ({
   occupantsList: {
@@ -24,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
 export default function LeaseP() {
   const classes = useStyles();
   const client = useClient();
+  const leaseAlarms = useSelector((state: IAlarmHubState) => state.leases )
   const [leases, setLeases] = React.useState<IFetchState<ILease[]>>({
     loading: true,
     data: undefined,
@@ -35,6 +39,7 @@ export default function LeaseP() {
       setLeases({ loading: false, data });
     };
     fetch();
+     
     // eslint-disable-next-line
   }, []);
 
@@ -49,6 +54,7 @@ export default function LeaseP() {
           columns={leaseColumns}
           fetchUri="/leases"
           entity="bail"
+          toolbarComponent={<Button variant="contained" style={{backgroundColor: "purple", color:"white"}}>Arrive à échéance ({leaseAlarms.length})</Button>}
         >
           {(
             form,
@@ -64,7 +70,6 @@ export default function LeaseP() {
               }
               {entities && 
                 entities.map((lease) => {
-                  console.log(lease)
                   const isSelected = getDocID(leasesSelected, lease.id)
                   if(form.open && form.isUpdating && leasesSelected[0] === lease.id) return <LeaseForm key={lease.id} form={form} setForm={setForm} />
                   return (

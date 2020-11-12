@@ -3,7 +3,6 @@ import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import Checkbox from "@material-ui/core/Checkbox";
 import Avatar from "@material-ui/core/Avatar";
-import Chip from '@material-ui/core/Chip'
 import { ILease } from "../../types";
 import useMoment, {useDiff} from "../../hooks/useMoment";
 
@@ -16,8 +15,6 @@ type LeaseCellProps =  {
 export default function LeaseCell({onSelect, selected, lease}: LeaseCellProps) {
   const getDate = useMoment()
   const getDiff = useDiff()
-
-  console.log(lease.isFirstMonthPaid)
 
   return (
     <TableRow
