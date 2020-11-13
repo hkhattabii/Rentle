@@ -137,7 +137,7 @@ export default function OccupantForm({ form, setForm }: OccupantFormProps) {
           onDataFetched={value =>
             setGuarantors({ data: value, loading: false })
           }
-          fetchUri="/guarantors"
+          fetchUri="/guarantors/withoutOccupant"
           messageEmpty="Aucun garants"
         >
           {guarantors.data &&

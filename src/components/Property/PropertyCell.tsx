@@ -4,6 +4,7 @@ import TableCell from "@material-ui/core/TableCell";
 import Checkbox from "@material-ui/core/Checkbox";
 import Avatar from "@material-ui/core/Avatar";
 import { IProperty } from "../../types";
+import Chip from "@material-ui/core/Chip";
 
 type PropertyCellProps =  {
     property: IProperty
@@ -46,7 +47,10 @@ export default function PropertyCell({onSelect, selected, property}: PropertyCel
       <TableCell align="center">{property.address.city}</TableCell>
       <TableCell align="center">{property.address.country}</TableCell>
       <TableCell align="center">
-        <Avatar alt="tqt" src={property.leasedBy && property.leasedBy.image} />
+        {
+          property.leasedBy ? <Avatar alt="tqt" src={property.leasedBy.image} />
+          : <Chip label="Aucun" color="secondary" />
+        }
       </TableCell>
     </TableRow>
   );
