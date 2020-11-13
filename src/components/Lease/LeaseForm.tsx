@@ -150,7 +150,7 @@ export default function LeaseForm({ form, setForm }: LeaseFormProps) {
           onDataFetched={(value) =>
             setProperties({ data: value, loading: false })
           }
-          fetchUri="/properties"
+          fetchUri="/properties/withoutLease"
           messageEmpty="Aucun bien"
         >
           {properties.data &&

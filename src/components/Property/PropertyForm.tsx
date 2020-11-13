@@ -5,10 +5,9 @@ import Select from "../UI/Select";
 import Input from "../UI/Input";
 import BedroomForm from "./BedroomForm";
 import ImageUploader from "../UI/ImageUploader";
-import { IPropertyForm, IPropertyFormState } from "./types";
-import { MenuItem, TextField } from "@material-ui/core";
-import { IEntityFormState, IFetchState, IOccupant } from "../../types";
-import SelectAsync from "../UI/SelectAsync";
+import { IPropertyForm} from "./types";
+import { TextField } from "@material-ui/core";
+import { IEntityFormState} from "../../types";
 
 interface PropertyFormProps {
   form: IEntityFormState<IPropertyForm>
@@ -16,8 +15,6 @@ interface PropertyFormProps {
 }
 
 export default function PropertyForm({ form, setForm}: PropertyFormProps) {
-  const [occupants, setOccupant] = React.useState<IFetchState<IOccupant[]>>({loading: true, data: undefined})
-  const [occupantSelected, setOccupantSelected] = React.useState<IOccupant | undefined>(undefined)
   const [bedroomsOpen, setBedroomsOpen] = React.useState(false);
 
   const handleOccupantChange = (name: string, value: any) => setForm({ ...form, data: {...form.data, [name]: value }  });
@@ -152,35 +149,6 @@ export default function PropertyForm({ form, setForm}: PropertyFormProps) {
           value={form.data.address.country}
           onChange={handleLocationChange}
         />
-      </TableCell>
-      <TableCell align="center">
-        <SelectAsync
-          data={occupants.data}
-          currentValue={
-            occupantSelected 
-              ? `${occupantSelected.name} ${occupantSelected.surname}`
-              : ""
-          }
-          onDataFetched={value => setOccupant({data: value, loading: false})}
-          fetchUri="/occupants"
-          messageEmpty="Aucun locataire"
-        >
-          {
-            occupants.data && occupants.data.map(occupant => (
-              <MenuItem
-                key={occupant.id}
-                value={`${occupant.name} ${occupant.surname}`}
-                onClick={() => {
-                  setOccupantSelected(occupant)
-                  handleOccupantChange("occupantID", occupant.id)
-                }}
-              >
-                {`${occupant.name} ${occupant.surname}`}
-              </MenuItem>
-
-            ))
-          }
-        </SelectAsync>
       </TableCell>
     </TableRow>
   );
