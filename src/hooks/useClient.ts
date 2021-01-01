@@ -5,51 +5,72 @@ import { IAPIRES, IDocument } from "../types";
 import { WithImage } from "./types";
 
 interface GetParams {
-  uri: string,
-  data?: any
+  uri: string;
+  data?: any;
 }
 
 interface DeleteParams<TEntity extends IDocument> {
-  entityIDS: string[],
-  entities: TEntity[] | undefined,
-  uri: string
+  entityIDS: string[];
+  entities: TEntity[] | undefined;
+  uri: string;
 }
 
-interface InsertUpdateParams<TForm extends WithImage, TEntity extends IDocument> {
-  form: TForm,
-  entities: TEntity[] | undefined
-  entity: "guarant" | "bien" | "locataire" | "bail"
-  isUpdating: boolean,
-  uri: string
+interface InsertUpdateParams<
+  TForm extends WithImage,
+  TEntity extends IDocument
+> {
+  form: TForm;
+  entities: TEntity[] | undefined;
+  entity: "guarant" | "bien" | "locataire" | "bail";
+  isUpdating: boolean;
+  uri: string;
 }
 
 export default function useClient() {
   const uploadImageFile = useUploadImage();
 
   return {
-    getAll: async function <TEntity extends IDocument>({uri, data}: GetParams) {
-      const res = (await axios.get<TEntity[]>(uri, {data})).data
-      return res
+    getAll: async function <TEntity extends IDocument>({
+      uri,
+      data,
+    }: GetParams) {
+      const res = (await axios.get<TEntity[]>(uri, { data })).data;
+      return res;
     },
-    delete: async function <TEntity extends IDocument>({entityIDS, entities, uri}: DeleteParams<TEntity>) {
+    delete: async function <TEntity extends IDocument>({
+      entityIDS,
+      entities,
+      uri,
+    }: DeleteParams<TEntity>) {
       message.loading("Suppression ...");
-      const res = (
-        await axios.delete<IAPIRES>(uri, { data: entityIDS })
-      ).data;
+      const res = (await axios.delete<IAPIRES>(uri, { data: entityIDS })).data;
       if (!res.success) {
         message.success(res.message);
         return;
       }
       message.success(res.message);
-      return entities?.filter(
-        (property) => !entityIDS.includes(property.id)
-      );
+      return entities?.filter((property) => !entityIDS.includes(property.id));
     },
-    insertUpdate: async function <TForm extends WithImage,TEntity extends IDocument>({form,entities,entity,isUpdating,uri}: InsertUpdateParams<TForm, TEntity>) {
+    insertUpdate: async function <
+      TForm extends WithImage,
+      TEntity extends IDocument
+    >({
+      form,
+      entities,
+      entity,
+      isUpdating,
+      uri,
+    }: InsertUpdateParams<TForm, TEntity>) {
       if (!entities) return;
-      const fileURL = isUpdating && typeof form.image === "string" ? form.image :  await uploadImageFile(form.image);
+      console.log(form);
+      const fileURL =
+        isUpdating && typeof form.image === "string"
+          ? form.image
+          : await uploadImageFile(form.image);
       const body = { ...form, image: fileURL };
-      isUpdating ? message.loading(`Mise à jour du ${entity}  ...`) : message.loading(`Insertion du ${entity} ...`);
+      isUpdating
+        ? message.loading(`Mise à jour du ${entity}  ...`)
+        : message.loading(`Insertion du ${entity} ...`);
       const res: IAPIRES<TEntity> = isUpdating
         ? (await axios.put(uri, body)).data
         : (await axios.post(uri, body)).data;
@@ -58,8 +79,15 @@ export default function useClient() {
         return;
       } else if (res.data) {
         message.success(res.message);
-        return isUpdating ? entities.map(entity => res.data && entity.id === res.data.id ? res.data : entity) : [...entities, res.data];
+        return isUpdating
+          ? entities.map((entity) =>
+              res.data && entity.id === res.data.id ? res.data : entity
+            )
+          : [...entities, res.data];
       }
+    },
+    generateDocuments: function (id: string) {
+      axios.post("/leases/GenerateContract", { id });
     },
   };
 }

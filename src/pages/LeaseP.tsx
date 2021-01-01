@@ -11,6 +11,7 @@ import LeaseForm from "../components/Lease/LeaseForm";
 import { Button } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { IAlarmHubState } from "../store/types";
+import LeaseToolbar from "../components/Lease/LeaseToolbar";
 
 const useStyles = makeStyles((theme) => ({
   occupantsList: {
@@ -27,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 export default function LeaseP() {
   const classes = useStyles();
   const client = useClient();
-  const leaseAlarms = useSelector((state: IAlarmHubState) => state.leases )
+  const leaseAlarms = useSelector((state: IAlarmHubState) => state.leases);
   const [leases, setLeases] = React.useState<IFetchState<ILease[]>>({
     loading: true,
     data: undefined,
@@ -39,14 +40,13 @@ export default function LeaseP() {
       setLeases({ loading: false, data });
     };
     fetch();
-     
+
     // eslint-disable-next-line
   }, []);
 
-
   const filter = () => {
-     setLeases({...leases, data: leaseAlarms})
-  }
+    setLeases({ ...leases, data: leaseAlarms });
+  };
 
   if (leases.loading) return <p>Loading</p>;
 
@@ -59,7 +59,9 @@ export default function LeaseP() {
           columns={leaseColumns}
           fetchUri="/leases"
           entity="bail"
-          toolbarComponent={<Button variant="contained" style={{backgroundColor: "purple", color:"white"}} onClick={filter}>Arrive à échéance ({leaseAlarms.length})</Button>}
+          toolbarComponent={
+            <LeaseToolbar filter={filter} leaseAlarms={leaseAlarms} />
+          }
         >
           {(
             form,
@@ -70,13 +72,20 @@ export default function LeaseP() {
             entities
           ) => (
             <React.Fragment>
-              {
-                form.open && !form.isUpdating && <LeaseForm form={form} setForm={setForm} />
-              }
-              {entities && 
+              {form.open && !form.isUpdating && (
+                <LeaseForm form={form} setForm={setForm} />
+              )}
+              {entities &&
                 entities.map((lease) => {
-                  const isSelected = getDocID(leasesSelected, lease.id)
-                  if(form.open && form.isUpdating && leasesSelected[0] === lease.id) return <LeaseForm key={lease.id} form={form} setForm={setForm} />
+                  const isSelected = getDocID(leasesSelected, lease.id);
+                  if (
+                    form.open &&
+                    form.isUpdating &&
+                    leasesSelected[0] === lease.id
+                  )
+                    return (
+                      <LeaseForm key={lease.id} form={form} setForm={setForm} />
+                    );
                   return (
                     <LeaseCell
                       key={lease.id}
