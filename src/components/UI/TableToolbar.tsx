@@ -21,7 +21,7 @@ interface TableToolbarProps {
   cancelUpdate: () => void;
   onInsertUpdate: () => void;
   onDelete: () => void;
-  onGenerate: () => void;
+  onGenerate: (type: "Contract" | "GuarantorDeposit") => void;
   selectedCount: number;
   component?: ReactElement;
 }
@@ -100,18 +100,33 @@ export default function TableToolbar({
         </Button>
       )}
       {history.location.pathname.includes("/leases") && selectedCount === 1 && (
-        <Button
-          variant="contained"
-          style={{
-            backgroundColor: "purple",
-            color: "white",
-            marginLeft: 4,
-            marginRight: 4,
-          }}
-          onClick={() => onGenerate()}
-        >
-          Générer le contrat de bail
-        </Button>
+        <React.Fragment>
+          <Button
+            variant="contained"
+            style={{
+              backgroundColor: "purple",
+              color: "white",
+              marginLeft: 4,
+              marginRight: 4,
+            }}
+            onClick={() => onGenerate("Contract")}
+          >
+            Imprimer le contrat de bail
+          </Button>
+
+          <Button
+            variant="contained"
+            style={{
+              backgroundColor: "purple",
+              color: "white",
+              marginLeft: 4,
+              marginRight: 4,
+            }}
+            onClick={() => onGenerate("GuarantorDeposit")}
+          >
+            Imprimer le montant de la guarantie
+          </Button>
+        </React.Fragment>
       )}
 
       {component}

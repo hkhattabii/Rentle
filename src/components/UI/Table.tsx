@@ -68,9 +68,15 @@ export default function Table<T extends IDocument, TForm extends WithImage>({
     setEntities(updatedState);
     setForm(formState);
   };
-  const onGenerate = async () => {
+  const onGenerate = async (type: "Contract" | "GuarantorDeposit") => {
     const id = entitiesSelected[0];
-    client.generateDocuments(id);
+    switch (type) {
+      case "Contract":
+        client.generateDocuments(id);
+        break;
+      case "GuarantorDeposit":
+        client.guarantorDeposit(id);
+    }
   };
   const cancelUpdate = () =>
     setForm({ ...form, open: false, isUpdating: false });

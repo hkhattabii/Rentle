@@ -11,16 +11,16 @@ const leaseFormState: IEntityFormState<ILeaseForm> = {
     index: 0,
     signatureDate: new Date().toISOString(),
     waterMeter: {
-      beginValue: 0
+      beginValue: 0,
     },
     gasMeter: {
-      beginValue: 0
+      beginValue: 0,
     },
     electricityMeter: {
-      beginValue: 0
+      beginValue: 0,
     },
     alarmDate: undefined,
-    depositDate: undefined,
+    deposit: 0,
     isFirstMonthPaid: false,
     visitBeginDate: new Date().toISOString(),
     visitEndDate: new Date().toISOString(),

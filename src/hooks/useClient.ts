@@ -89,5 +89,8 @@ export default function useClient() {
     generateDocuments: function (id: string) {
       axios.post("/leases/GenerateContract", { id });
     },
+    guarantorDeposit: function (id: string) {
+      axios.post("/leases/GenerateGuarantorDeposit", { id });
+    },
   };
 }
